@@ -257,10 +257,10 @@ def main():
         # ###################################################
 
         with pathmgr.open(os.path.join(exp_path, "train_log.txt"),"a") as op:
-            op.write(json.dumps(episode_stats_log) + "\n")
+            op.write(json.dumps(episode_stats_log, cls=NumpyEncoder) + "\n")
 
         with pathmgr.open(os.path.join(exp_path, "train_infos.txt"),"a") as op:
-            op.write(json.dumps(infos) + "\n")
+            op.write(json.dumps(infos, cls=NumpyEncoder) + "\n")
 
     # max_episode = load_checkpoint(agent, os.path.join(exp_path, "best.pth"))
     # print("Test Max Episode: [{}/{}]".format(max_episode, cfg.num_episodes))
@@ -333,6 +333,12 @@ def validate(environment, agent):
         stats["episode_stats"][k] = v
 
     return stats, infos
+
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 if __name__ == '__main__':
     main()
