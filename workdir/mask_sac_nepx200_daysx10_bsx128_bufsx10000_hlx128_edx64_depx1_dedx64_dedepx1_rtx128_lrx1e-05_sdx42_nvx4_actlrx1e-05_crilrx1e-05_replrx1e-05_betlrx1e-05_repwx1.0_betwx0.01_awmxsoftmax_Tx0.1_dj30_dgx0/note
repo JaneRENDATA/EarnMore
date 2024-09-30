@@ -12,3 +12,8 @@ Output:
 Representation: 1020 values or classes
 Actor: Binary decision (2 possible actions or a single continuous value in range [0,1])
 Critic: Similar to actor, but possibly estimating the value of the state-action pair
+
+
+The representation network creates a rich embedding of the current market state.
+The actor network uses this representation to decide whether to buy or sell.
+The critic network estimates how valuable that action is expected to be, which can be used to train and improve the actor's decisions over time.
