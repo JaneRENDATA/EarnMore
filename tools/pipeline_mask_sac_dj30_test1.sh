@@ -2,10 +2,10 @@ python tools/make_scripts.py \
  --config configs/mask_sac_portfolio_management.py \
  --mask \
  --action_wrapper_method softmax \
- --num_episodes 200 \
+ --num_episodes 600 \
  --dataset dj30 \
  --num_stocks 28 \
- --buffer_size 10000 \
+ --buffer_size 100000 \
  --repeat_times 128 \
  --gpu_id 0 \
  --days 10 \
